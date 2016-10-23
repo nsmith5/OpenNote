@@ -22,7 +22,7 @@ public class NotePad : Gtk.DrawingArea
 	public override bool motion_notify_event (Gdk.EventMotion event)
 	{
 		weak Device device = event.get_device ();
-		print ("Input source type : %s\n", device.input_source.to_string()); 
+		print ("Input device : %s\n", device.get_name()); 
 		if (device.input_source == InputSource.PEN)
 		{
 			print("Hello!\n");
