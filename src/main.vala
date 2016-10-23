@@ -38,7 +38,8 @@ public class Application : Gtk.Window
 		Gtk.init(ref args);
 		var window = new Application ();
 		window.show_all ();
-
+		print ("New application made\n");
+		
 		Gtk.main();
 		return 0;
 	}
