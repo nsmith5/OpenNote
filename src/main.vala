@@ -8,7 +8,11 @@ public class Application : Gtk.Window
 		this.destroy.connect (Gtk.main_quit);
 		this.set_default_size (400, 400);
 
+		var scrollwin = new ScrolledWindow (null, null);
 		var drawing_area = new NotePad ();
+		scrollwin.add_with_viewport (drawing_area);
+		scrollwin.set_policy (PolicyType.NEVER, PolicyType.ALWAYS);
+
 		/*
 		drawing_area.draw.connect ((context) =>
 		{
@@ -30,7 +34,7 @@ public class Application : Gtk.Window
 			return true;
 		});
 		*/
-		this.add (drawing_area);
+		this.add (scrollwin);
 	}
 
 	public static int main (string[] args)
@@ -39,7 +43,7 @@ public class Application : Gtk.Window
 		var window = new Application ();
 		window.show_all ();
 		print ("New application made\n");
-		
+
 		Gtk.main();
 		return 0;
 	}
