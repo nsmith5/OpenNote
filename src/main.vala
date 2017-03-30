@@ -1,3 +1,21 @@
+/* Copyright 2017 Nathan Smith
+ * 
+ * This file is part of OpenNote
+ * 
+ * OpenNote is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * OpenNote is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with OpenNote. If not, see http://www.gnu.org/licenses/.
+ */
+
 using Gtk;
 
 public class Application : Gtk.Window
@@ -9,31 +27,23 @@ public class Application : Gtk.Window
 		this.set_default_size (400, 400);
 
 		var scrollwin = new ScrolledWindow (null, null);
+		scrollwin.set_policy (PolicyType.ALWAYS, PolicyType.ALWAYS);
+		scrollwin.kinetic_scrolling = true;
+
+		var viewport = new Viewport (null, null);
+		viewport.set_size_request (255, 300);
+		scrollwin.add(viewport);
+
+		var box = new Box (Orientation.VERTICAL, 0);
 		var drawing_area = new NotePad ();
-		scrollwin.add_with_viewport (drawing_area);
-		scrollwin.set_policy (PolicyType.NEVER, PolicyType.ALWAYS);
+		box.pack_start (drawing_area);
+		viewport.add(box);                
 
-		/*
-		drawing_area.draw.connect ((context) =>
-		{
-			weak Gtk.StyleContext style_context = drawing_area.get_style_context ();
-			int height = drawing_area.get_allocated_height ();
-			int width = drawing_area.get_allocated_width ();
-			Gdk.RGBA color = style_context.get_color (0);
-
-			// Draw an arc:
-			double xc = width / 2.0;
-			double yc = height / 2.0;
-			double radius = int.min (width, height) / 2.0;
-			double angle1 = 0;
-			double angle2 = 2*Math.PI;
-
-			context.arc (xc, yc, radius, angle1, angle2);
-			Gdk.cairo_set_source_rgba (context, color);
-			context.fill ();
-			return true;
-		});
-		*/
+                var header = new HeaderBar ();
+                header.title = "Opennote";
+                header.show_close_button = true;
+                
+                this.set_titlebar (header);
 		this.add (scrollwin);
 	}
 

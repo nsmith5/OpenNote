@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=OpenNote
+GenericName=OpenNote App
+Comment=An open source OneNote alternative
+Categories=GTK; Utility;
+Exec=opennote
+Icon=application-default-icon
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=opennote
+Keywords=Open;Note;One;Write;
